@@ -3,9 +3,8 @@ extraction:
         after_prepare:
             - wget http://amp.wand.net.nz/debian/pool/bionic/main/libw/libwandevent/libwandevent_3.0.1-1_amd64.deb
             - wget http://amp.wand.net.nz/debian/pool/bionic/main/libw/libwandevent/libwandevent-dev_3.0.1-1_amd64.deb
-            - dpkg -x libwandevent_3.0.1-1_amd64.deb /tmp/
-            - dpkg -x libwandevent-dev_3.0.1-1_amd64.deb /tmp/
-            - ./bootstrap.sh
+            - dpkg -x libwandevent_3.0.1-1_amd64.deb .
+            - dpkg -x libwandevent-dev_3.0.1-1_amd64.deb .
 
         configure:
-            command: CFLAGS=-I/tmp/usr/infclude/ LD_FLAGS=-L/tmp/usr/lib/ ./configure
+            command: CFLAGS=-I`pwd`/usr/include/ LD_FLAGS=-L`pwd`/usr/lib/ ./configure
