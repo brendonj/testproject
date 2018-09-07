@@ -1,0 +1,14 @@
+Source: testproject
+Section: net
+Priority: optional
+Maintainer: Brendon Jones <brendonj@waikato.ac.nz>
+Build-Depends: debhelper (>= 8.0.0)
+Standards-Version: 3.9.3
+#Vcs-Git: git://git.debian.org/collab-maint/ampy.git
+#Vcs-Browser: http://git.debian.org/?p=collab-maint/ampy.git;a=summary
+
+Package: testproject
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Test project to test CI, CD and LGTM integration.
+ Test project to test CI, CD and LGTM integration.
