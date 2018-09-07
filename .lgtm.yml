@@ -1,7 +1,7 @@
 extraction:
     cpp:
         after_prepare:
-            - echo "deb http://amp.wand.net.nz/debian/ `lsb_release -c -s` main" | sudo tee /etc/apt/sources.list.d/amplet2.list
-            - wget -O- http://amp.wand.net.nz/debian/pubkey.gpg | sudo apt-key add -
-            - sudo apt-get update
-            - sudo apt-get install libwandevent3-dev
+            - echo "deb http://amp.wand.net.nz/debian/ `lsb_release -c -s` main" > /etc/apt/sources.list.d/amplet2.list
+            - wget -O- http://amp.wand.net.nz/debian/pubkey.gpg | apt-key add -
+            - apt-get update
+            - apt-get install libwandevent3-dev
