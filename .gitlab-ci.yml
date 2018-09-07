@@ -1,0 +1,21 @@
+stages:
+ - build
+
+build-package:
+  stage: build
+  image: faucet/dbuilder
+  script:
+    - apt-get update && apt-get upgrade -y
+    - mk-build-deps -i -r -t 'apt-get -f -y --force-yes'
+    - export DEBEMAIL='brendonj@waikato.ac.nz'
+    - export DEBFULLNAME='Brendon Jones'
+    - debchange --newversion ${CI_COMMIT_REF_NAME} -b "New upstream release"
+    - fakeroot debian/rules binary
+    - mkdir built-packages || true
+    - mv ../*.deb built-packages/
+  artifacts:
+    paths:
+      - built-packages/*
+    expire_in: 1 hour
+  only:
+    - tags
