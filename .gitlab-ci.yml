@@ -58,6 +58,8 @@ build-package-bionic-arm64:
     expire_in: 1 hour
   only:
     - tags
+  tags:
+    - multiarch
 
 build-package-xenial:
   stage: build
@@ -101,3 +103,5 @@ build-package-jessie-arm64:
     expire_in: 1 hour
   only:
     - tags
+  tags:
+    - multiarch
