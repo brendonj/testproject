@@ -1,26 +1,53 @@
 stages:
  - build
 
-build-package:
-  stage: build
-  image: docker.io/multiarch/ubuntu-debootstrap:amd64-xenial-slim
+.build_template: &build_definition
+  script:
+    - mk-build-deps -i -r -t 'apt-get -f -y --force-yes'
+    - export DEBEMAIL='brendonj@waikato.ac.nz'
+    - export DEBFULLNAME='Brendon Jones'
+    - fakeroot debian/rules binary
+    - mkdir built-packages || true
+    - mv ../*.deb built-packages/
+
+.apt_template: &generic_apt_setup
   script:
     - echo 'APT::Install-Recommends "0";' > /etc/apt/apt.conf.d/10no-recommends
     - echo 'APT::Install-Suggests "0";' > /etc/apt/apt.conf.d/10no-suggests
-    # i386/amd64 Ubuntu only
+
+.ubuntu_native_template: &ubuntu_apt_setup
+  script:
     - /bin/sed -i 's/main/main restricted universe/' /etc/apt/sources.list
+
+.apt_dependencies_template: &apt_dependencies
+  script:
     - apt-get update && apt-get install -y build-essential ca-certificates devscripts dpkg-dev equivs lsb-release wget
     - echo "deb http://amp.wand.net.nz/debian/ `lsb_release -c -s` main" > /etc/apt/sources.list.d/amplet2.list
     - wget -O- http://amp.wand.net.nz/debian/pubkey.gpg | apt-key add -
     - apt-get update && apt-get upgrade -y
-    - mk-build-deps -i -r -t 'apt-get -f -y --force-yes'
-    - export DEBEMAIL='brendonj@waikato.ac.nz'
-    - export DEBFULLNAME='Brendon Jones'
-    # TODO use my proper changelog, just remove this line?
-    #- debchange --newversion ${CI_COMMIT_REF_NAME} -b "New upstream release"
-    - fakeroot debian/rules binary
-    - mkdir built-packages || true
-    - mv ../*.deb built-packages/
+
+build-package-xenial:
+  stage: build
+  image: docker.io/multiarch/ubuntu-debootstrap:amd64-xenial-slim
+  script:
+    <<: *generic_apt_setup
+    <<: *ubuntu_apt_setup
+    <<: *apt_dependencies
+    <<: *build_definition
+  artifacts:
+    paths:
+      - built-packages/*
+    expire_in: 1 hour
+  only:
+    - tags
+
+build-package-stretch:
+  stage: build
+  image: docker.io/multiarch/debian-debootstrap:amd64-stretch-slim
+  script:
+    <<: *generic_apt_setup
+    <<: *apt_dependencies
+    <<: *build_definition
   artifacts:
     paths:
       - built-packages/*
