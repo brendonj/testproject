@@ -3,9 +3,13 @@ stages:
 
 build-package:
   stage: build
-  image: faucet/dbuilder
+  image: docker.io/multiarch/ubuntu-debootstrap:amd64-xenial-slim
   script:
-    - apt-get update && apt-get install -y wget lsb-release
+    - echo 'APT::Install-Recommends "0";' > /etc/apt/apt.conf.d/10no-recommends
+    - echo 'APT::Install-Suggests "0";' > /etc/apt/apt.conf.d/10no-suggests
+    # i386/amd64 Ubuntu only
+    - /bin/sed -i 's/main/main restricted universe/' /etc/apt/sources.list
+    - apt-get update && apt-get install -y build-essential ca-certificates devscripts dpkg-dev equivs lsb-release wget
     - echo "deb http://amp.wand.net.nz/debian/ `lsb_release -c -s` main" > /etc/apt/sources.list.d/amplet2.list
     - wget -O- http://amp.wand.net.nz/debian/pubkey.gpg | apt-key add -
     - apt-get update && apt-get upgrade -y
