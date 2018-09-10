@@ -1,3 +1,9 @@
+testproject (0.0.1-2) unstable; urgency=medium
+
+  * Add libwandevent-dev as a dependency.
+
+ -- Brendon Jones <brendonj@waikato.ac.nz>  Mon, 10 Sep 2018 14:08:34 +1200
+
 testproject (0.0.1-1) unstable; urgency=low
 
   * Initial release
