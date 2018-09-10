@@ -49,8 +49,8 @@ build-package-bionic-arm64:
   image: docker.io/multiarch/ubuntu-debootstrap:arm64-bionic-slim
   script:
     - *generic_apt_setup
-    - *ubuntu_cross_setup
     - *generic_apt_dependencies
+    - *ubuntu_cross_setup
     - *generic_apt_build
   artifacts:
     paths:
