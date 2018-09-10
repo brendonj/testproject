@@ -1,3 +1,15 @@
+testproject (0.0.8-1) unstable; urgency=medium
+
+  * Try building some arm64 packages as well.
+
+ -- Brendon Jones <brendonj@waikato.ac.nz>  Mon, 10 Sep 2018 16:48:41 +1200
+
+testproject (0.0.7-1) unstable; urgency=medium
+
+  * Make sure gnupg is installed so we can add repository keys.
+
+ -- Brendon Jones <brendonj@waikato.ac.nz>  Mon, 10 Sep 2018 16:32:01 +1200
+
 testproject (0.0.6-1) unstable; urgency=medium
 
   * Use strings rather than lists as yaml can't flatten the lists.
