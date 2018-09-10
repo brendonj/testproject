@@ -5,7 +5,7 @@ build-package:
   stage: build
   image: faucet/dbuilder
   script:
-    # XXX does the default image have lsb_release and wget?
+    - apt-get update && apt-get install -y wget lsb_release
     - echo "deb http://amp.wand.net.nz/debian/ `lsb_release -c -s` main" > /etc/apt/sources.list.d/amplet2.list
     - wget -O- http://amp.wand.net.nz/debian/pubkey.gpg | apt-key add -
     - apt-get update && apt-get upgrade -y
