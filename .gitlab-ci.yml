@@ -18,7 +18,7 @@ stages:
 
 .apt_dependencies_template: &apt_dependencies
   apt-get update &&
-  apt-get install -y build-essential ca-certificates devscripts dpkg-dev equivs lsb-release wget &&
+  apt-get install -y build-essential ca-certificates devscripts dpkg-dev equivs  gnupg lsb-release wget &&
   echo "deb http://amp.wand.net.nz/debian/ `lsb_release -c -s` main" > /etc/apt/sources.list.d/amplet2.list &&
   wget -O- http://amp.wand.net.nz/debian/pubkey.gpg | apt-key add - &&
   apt-get update &&
