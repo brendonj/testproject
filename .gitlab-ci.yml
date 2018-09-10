@@ -1,7 +1,7 @@
 stages:
  - build
 
-.build_template: &build_definition
+.generic_apt_build_template: &generic_apt_build
   mk-build-deps -i -r -t 'apt-get -f -y --force-yes' &&
   export DEBEMAIL='brendonj@waikato.ac.nz' &&
   export DEBFULLNAME='Brendon Jones' &&
@@ -9,14 +9,19 @@ stages:
   mkdir built-packages || true &&
   mv ../*.deb built-packages/
 
-.apt_template: &generic_apt_setup
+.generic_apt_setup_template: &generic_apt_setup
   echo 'APT::Install-Recommends "0";' > /etc/apt/apt.conf.d/10no-recommends &&
   echo 'APT::Install-Suggests "0";' > /etc/apt/apt.conf.d/10no-suggests
 
-.ubuntu_native_template: &ubuntu_apt_setup
+.ubuntu_native_setup_template: &ubuntu_native_setup
   /bin/sed -i 's/main/main restricted universe/' /etc/apt/sources.list
 
-.apt_dependencies_template: &apt_dependencies
+.ubuntu_cross_setup_template: &ubuntu_cross_setup
+  echo "deb http://ports.ubuntu.com/ubuntu-ports `lsb_release -c -s` main restricted universe" >> /etc/apt/sources.list &&
+  echo "deb http://ports.ubuntu.com/ubuntu-ports `lsb_release -c -s`-updates main restricted universe" >> /etc/apt/sources.list &&
+  echo "deb http://ports.ubuntu.com/ubuntu-ports `lsb_release -c -s`-security main restricted universe" >> /etc/apt/sources.list
+
+.generic_apt_dependencies_template: &generic_apt_dependencies
   apt-get update &&
   apt-get install -y build-essential ca-certificates devscripts dpkg-dev equivs  gnupg lsb-release wget &&
   echo "deb http://amp.wand.net.nz/debian/ `lsb_release -c -s` main" > /etc/apt/sources.list.d/amplet2.list &&
@@ -24,14 +29,44 @@ stages:
   apt-get update &&
   apt-get upgrade -y
 
+build-package-bionic:
+  stage: build
+  image: docker.io/multiarch/ubuntu-debootstrap:amd64-bionic-slim
+  script:
+    - *generic_apt_setup
+    - *ubuntu_native_setup
+    - *generic_apt_dependencies
+    - *generic_apt_build
+  artifacts:
+    paths:
+      - built-packages/*
+    expire_in: 1 hour
+  only:
+    - tags
+
+build-package-bionic-arm64:
+  stage: build
+  image: docker.io/multiarch/ubuntu-debootstrap:arm64-bionic-slim
+  script:
+    - *generic_apt_setup
+    - *ubuntu_cross_setup
+    - *generic_apt_dependencies
+    - *generic_apt_build
+  artifacts:
+    paths:
+      - built-packages/*
+    expire_in: 1 hour
+  only:
+    - tags
+
 build-package-xenial:
   stage: build
   image: docker.io/multiarch/ubuntu-debootstrap:amd64-xenial-slim
   script:
     - *generic_apt_setup
-    - *ubuntu_apt_setup
-    - *apt_dependencies
-    - *build_definition
+    - *ubuntu_native_setup
+    - *generic_apt_dependencies
+    - *generic_apt_build
   artifacts:
     paths:
       - built-packages/*
@@ -44,8 +79,22 @@ build-package-stretch:
   image: docker.io/multiarch/debian-debootstrap:amd64-stretch-slim
   script:
     - *generic_apt_setup
-    - *apt_dependencies
-    - *build_definition
+    - *generic_apt_dependencies
+    - *generic_apt_build
+  artifacts:
+    paths:
+      - built-packages/*
+    expire_in: 1 hour
+  only:
+    - tags
+
+build-package-jessie-arm64:
+  stage: build
+  image: docker.io/multiarch/debian-debootstrap:arm64-stretch-slim
+  script:
+    - *generic_apt_setup
+    - *generic_apt_dependencies
+    - *generic_apt_build
   artifacts:
     paths:
       - built-packages/*
