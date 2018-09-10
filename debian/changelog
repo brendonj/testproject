@@ -1,3 +1,9 @@
+testproject (0.0.3-1) UNRELEASED; urgency=medium
+
+  * Use a Xenial image rather than the faucet image (which is Buster).
+
+ -- Brendon Jones <brendonj@waikato.ac.nz>  Mon, 10 Sep 2018 14:56:26 +1200
+
 testproject (0.0.2-1) unstable; urgency=medium
 
   * Make sure wget and lsb_release are installed first.
