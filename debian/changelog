@@ -1,3 +1,9 @@
+testproject (0.0.6-1) unstable; urgency=medium
+
+  * Use strings rather than lists as yaml can't flatten the lists.
+
+ -- Brendon Jones <brendonj@waikato.ac.nz>  Mon, 10 Sep 2018 16:22:13 +1200
+
 testproject (0.0.5-1) unstable; urgency=medium
 
   * Templates for the script section shouldn't also have a script section.
