@@ -1,8 +1,14 @@
-testproject (0.0.3-1) UNRELEASED; urgency=medium
+testproject (0.0.4-1) unstable; urgency=medium
+
+  * Try using yaml anchors to build both Xenial and Stretch package.
+
+ -- Brendon Jones <brendonj@waikato.ac.nz>  Mon, 10 Sep 2018 15:46:18 +1200
+
+testproject (0.0.3-1) unstable; urgency=medium
 
   * Use a Xenial image rather than the faucet image (which is Buster).
 
- -- Brendon Jones <brendonj@waikato.ac.nz>  Mon, 10 Sep 2018 14:56:26 +1200
+ -- Brendon Jones <brendonj@waikato.ac.nz>  Mon, 10 Sep 2018 15:45:50 +1200
 
 testproject (0.0.2-1) unstable; urgency=medium
 
