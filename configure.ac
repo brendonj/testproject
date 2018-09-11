@@ -333,7 +333,10 @@ AC_SUBST([AM_CFLAGS], ["-rdynamic -g -Wall -W -D_GNU_SOURCE -DAMP_CONFIG_DIR=\\\
 
 
 AC_CONFIG_FILES([Makefile
-                 src/Makefile])
+                 src/Makefile
+                 src/foo/Makefile
+                 src/tests/Makefile
+                 src/tests/python/Makefile])
 AC_OUTPUT
 
 reportopt() {
