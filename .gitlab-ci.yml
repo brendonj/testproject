@@ -13,7 +13,7 @@ stages:
   echo 'APT::Install-Recommends "0";' > /etc/apt/apt.conf.d/10no-recommends &&
   echo 'APT::Install-Suggests "0";' > /etc/apt/apt.conf.d/10no-suggests
 
-.ubuntu_native_setup_template: &ubuntu_native_setup
+.ubuntu_apt_setup_template: &ubuntu_apt_setup
   /bin/sed -i 's/main/main restricted universe/' /etc/apt/sources.list
 
 .ubuntu_cross_setup_template: &ubuntu_cross_setup
@@ -34,7 +34,7 @@ build-package-bionic:
   image: docker.io/multiarch/ubuntu-debootstrap:amd64-bionic-slim
   script:
     - *generic_apt_setup
-    - *ubuntu_native_setup
+    - *ubuntu_apt_setup
     - *generic_apt_dependencies
     - *generic_apt_build
   artifacts:
@@ -49,6 +49,7 @@ build-package-bionic-arm64:
   image: docker.io/multiarch/ubuntu-debootstrap:arm64-bionic-slim
   script:
     - *generic_apt_setup
+    - *ubuntu_apt_setup
     - *generic_apt_dependencies
     - *ubuntu_cross_setup
     - *generic_apt_build
@@ -66,7 +67,7 @@ build-package-xenial:
   image: docker.io/multiarch/ubuntu-debootstrap:amd64-xenial-slim
   script:
     - *generic_apt_setup
-    - *ubuntu_native_setup
+    - *ubuntu_apt_setup
     - *generic_apt_dependencies
     - *generic_apt_build
   artifacts:
