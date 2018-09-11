@@ -1,3 +1,17 @@
+testproject (0.0.10-1) unstable; urgency=medium
+
+  * Reorder commands so lsb_release is installed before use.
+  * Use a Debian Jessie image for the Jessie build rather than Stretch.
+  * Specify exact architecture required in the tags.
+
+ -- Brendon Jones <brendonj@waikato.ac.nz>  Tue, 11 Sep 2018 13:15:27 +1200
+
+testproject (0.0.9-1) unstable; urgency=medium
+
+  * Tag non-amd64 builds as multiarch to only build on certain runners.
+
+ -- Brendon Jones <brendonj@waikato.ac.nz>  Tue, 11 Sep 2018 13:14:32 +1200
+
 testproject (0.0.8-1) unstable; urgency=medium
 
   * Try building some arm64 packages as well.
