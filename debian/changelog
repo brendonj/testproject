@@ -1,3 +1,9 @@
+testproject (0.0.13-1) unstable; urgency=medium
+
+  * Fix tags so correct architectures are used for building packages.
+
+ -- Brendon Jones <brendonj@waikato.ac.nz>  Tue, 11 Sep 2018 14:08:52 +1200
+
 testproject (0.0.12-1) unstable; urgency=medium
 
   * Bionic images already contain base repository lines.
