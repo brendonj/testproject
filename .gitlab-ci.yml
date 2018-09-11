@@ -29,7 +29,7 @@ stages:
   apt-get update &&
   apt-get upgrade -y
 
-build-package-bionic:
+build-bionic:
   stage: build
   image: docker.io/multiarch/ubuntu-debootstrap:amd64-bionic-slim
   script:
@@ -44,7 +44,7 @@ build-package-bionic:
   only:
     - tags
 
-build-package-bionic-arm64:
+build-bionic-arm64:
   stage: build
   image: docker.io/multiarch/ubuntu-debootstrap:arm64-bionic-slim
   script:
@@ -61,7 +61,7 @@ build-package-bionic-arm64:
   tags:
     - arm64
 
-build-package-xenial:
+build-xenial:
   stage: build
   image: docker.io/multiarch/ubuntu-debootstrap:amd64-xenial-slim
   script:
@@ -76,7 +76,7 @@ build-package-xenial:
   only:
     - tags
 
-build-package-xenial-arm64:
+build-xenial-arm64:
   stage: build
   image: docker.io/multiarch/ubuntu-debootstrap:arm64-xenial-slim
   script:
@@ -94,7 +94,7 @@ build-package-xenial-arm64:
   tags:
     - arm64
 
-build-package-stretch:
+build-stretch:
   stage: build
   image: docker.io/multiarch/debian-debootstrap:amd64-stretch-slim
   script:
@@ -108,7 +108,7 @@ build-package-stretch:
   only:
     - tags
 
-build-package-stretch-arm64:
+build-stretch-arm64:
   stage: build
   image: docker.io/multiarch/debian-debootstrap:arm64-stretch-slim
   script:
@@ -124,7 +124,7 @@ build-package-stretch-arm64:
   tags:
     - arm64
 
-build-package-jessie:
+build-jessie:
   stage: build
   image: docker.io/multiarch/debian-debootstrap:amd64-jessie-slim
   script:
@@ -138,7 +138,7 @@ build-package-jessie:
   only:
     - tags
 
-build-package-jessie-arm64:
+build-jessie-arm64:
   stage: build
   image: docker.io/multiarch/debian-debootstrap:arm64-jessie-slim
   script:
