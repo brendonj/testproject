@@ -91,6 +91,8 @@ build-package-xenial-arm64:
     expire_in: 1 hour
   only:
     - tags
+  tags:
+    - arm64
 
 build-package-stretch:
   stage: build
@@ -119,6 +121,8 @@ build-package-stretch-arm64:
     expire_in: 1 hour
   only:
     - tags
+  tags:
+    - arm64
 
 build-package-jessie:
   stage: build
@@ -133,8 +137,6 @@ build-package-jessie:
     expire_in: 1 hour
   only:
     - tags
-  tags:
-    - arm64
 
 build-package-jessie-arm64:
   stage: build
