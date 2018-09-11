@@ -92,7 +92,7 @@ build-package-stretch:
 
 build-package-jessie-arm64:
   stage: build
-  image: docker.io/multiarch/debian-debootstrap:arm64-stretch-slim
+  image: docker.io/multiarch/debian-debootstrap:arm64-jessie-slim
   script:
     - *generic_apt_setup
     - *generic_apt_dependencies
