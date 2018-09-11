@@ -51,7 +51,6 @@ build-package-bionic-arm64:
     - *generic_apt_setup
     - *ubuntu_apt_setup
     - *generic_apt_dependencies
-    - *ubuntu_cross_setup
     - *generic_apt_build
   artifacts:
     paths:
