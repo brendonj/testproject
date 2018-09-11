@@ -59,7 +59,7 @@ build-package-bionic-arm64:
   only:
     - tags
   tags:
-    - multiarch
+    - arm64
 
 build-package-xenial:
   stage: build
@@ -104,4 +104,4 @@ build-package-jessie-arm64:
   only:
     - tags
   tags:
-    - multiarch
+    - arm64
