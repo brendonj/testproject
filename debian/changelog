@@ -1,3 +1,9 @@
+testproject (0.0.11-1) unstable; urgency=medium
+
+  * Bionic cross build needs restricted/universe to get equivs package.
+
+ -- Brendon Jones <brendonj@waikato.ac.nz>  Tue, 11 Sep 2018 13:41:07 +1200
+
 testproject (0.0.10-1) unstable; urgency=medium
 
   * Reorder commands so lsb_release is installed before use.
