@@ -1,3 +1,10 @@
+testproject (0.0.12-1) unstable; urgency=medium
+
+  * Bionic images already contain base repository lines.
+  * Build amd64 and arm64 versions for all flavours.
+
+ -- Brendon Jones <brendonj@waikato.ac.nz>  Tue, 11 Sep 2018 14:03:40 +1200
+
 testproject (0.0.11-1) unstable; urgency=medium
 
   * Bionic cross build needs restricted/universe to get equivs package.
