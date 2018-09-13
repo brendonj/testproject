@@ -1,3 +1,7 @@
+path_classifiers:
+    test:
+        - exclude: src/tests
+
 extraction:
     cpp:
         after_prepare:
