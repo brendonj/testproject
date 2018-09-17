@@ -124,9 +124,9 @@ build-stretch-arm64:
   tags:
     - arm64
 
-build-jessie:
+build-jessie-amd64:
   stage: build
-  image: docker.io/multiarch/debian-debootstrap:amd64-jessie-slim
+  image: multiarch/debian-debootstrap:amd64-jessie-slim
   script:
     - *generic_apt_setup
     - *generic_apt_dependencies
@@ -140,7 +140,7 @@ build-jessie:
 
 build-jessie-arm64:
   stage: build
-  image: docker.io/multiarch/debian-debootstrap:arm64-jessie-slim
+  image: multiarch/debian-debootstrap:arm64-jessie-slim
   script:
     - *generic_apt_setup
     - *generic_apt_dependencies
@@ -151,12 +151,24 @@ build-jessie-arm64:
     expire_in: 1 hour
   only:
     - tags
-  tags:
-    - arm64
 
 build-jessie-armhf:
   stage: build
   image: multiarch/debian-debootstrap:armhf-jessie-slim
+  script:
+    - *generic_apt_setup
+    - *generic_apt_dependencies
+    - *generic_apt_build
+  artifacts:
+    paths:
+      - built-packages/*
+    expire_in: 1 hour
+  only:
+    - tags
+
+build-jessie-i386:
+  stage: build
+  image: multiarch/debian-debootstrap:i386-jessie-slim
   script:
     - *generic_apt_setup
     - *generic_apt_dependencies
