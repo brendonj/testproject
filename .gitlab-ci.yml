@@ -153,3 +153,17 @@ build-jessie-arm64:
     - tags
   tags:
     - arm64
+
+build-jessie-armhf:
+  stage: build
+  image: multiarch/debian-debootstrap:armhf-jessie-slim
+  script:
+    - *generic_apt_setup
+    - *generic_apt_dependencies
+    - *generic_apt_build
+  artifacts:
+    paths:
+      - built-packages/*
+    expire_in: 1 hour
+  only:
+    - tags
