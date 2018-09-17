@@ -151,6 +151,8 @@ build-jessie-arm64:
     expire_in: 1 hour
   only:
     - tags
+  tags:
+    - arm64
 
 build-jessie-armhf:
   stage: build
