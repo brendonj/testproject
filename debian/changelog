@@ -1,3 +1,9 @@
+testproject (0.0.14-1) unstable; urgency=medium
+
+  * Lots of things around lgtm analysis and multiarch.
+
+ -- Brendon Jones <brendonj@waikato.ac.nz>  Mon, 17 Sep 2018 16:56:40 +1200
+
 testproject (0.0.13-1) unstable; urgency=medium
 
   * Fix tags so correct architectures are used for building packages.
