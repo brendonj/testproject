@@ -11,3 +11,7 @@ extraction:
             - dpkg -x libwandevent-dev_3.0.1-1_amd64.deb .
             - export CFLAGS=-I$LGTM_SRC/usr/include
             - export LDFLAGS=-L$LGTM_SRC/usr/lib
+
+    python:
+        index:
+            - include: src/tests/python
